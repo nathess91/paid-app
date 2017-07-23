@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723004947) do
+ActiveRecord::Schema.define(version: 20170723005300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.date "due_date"
+    t.date "min_amount_due"
+    t.decimal "interest_rate"
+    t.boolean "is_debt"
+    t.decimal "total_amount"
+    t.date "promo_apr_exp_date"
+    t.string "name"
+    t.integer "category"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bills_on_user_id"
+  end
 
   create_table "expenses", force: :cascade do |t|
     t.string "category"
@@ -47,5 +62,6 @@ ActiveRecord::Schema.define(version: 20170723004947) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bills", "users"
   add_foreign_key "expenses", "users"
 end
