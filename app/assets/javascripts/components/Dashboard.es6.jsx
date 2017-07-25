@@ -1,18 +1,16 @@
 class Dashboard extends React.Component {
-
-
   render () {
     getDate = () => {
       let today = new Date().toLocaleDateString('en-US', {
-          weekday: 'long',
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric',
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
       });
       return today.toUpperCase();
     }
     greet = () => {
-      const hours = new Date().hours;
+      const hours = new Date().getHours();
       if (hours > 12) {
         return 'Good Afternoon,';
       } else {
