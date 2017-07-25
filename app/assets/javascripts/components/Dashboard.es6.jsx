@@ -9,6 +9,7 @@ class Dashboard extends React.Component {
       });
       return today.toUpperCase();
     }
+    const { bills, user } = this.props;
     greet = () => {
       const hours = new Date().getHours();
       if (hours > 12) {
@@ -17,12 +18,12 @@ class Dashboard extends React.Component {
         return 'Good Morning,';
       }
     }
-    const firstName = this.props.user.first_name;
+    const firstName = user.first_name;
     return (
       <div className="container">
-        <p>{getDate ``}</p>
-        <h3>{greet ``} {firstName}</h3>
-        <Bills bills={this.props.bills} />
+        <p>{getDate()}</p>
+        <h3>{`${greet()} ${firstName}`}</h3>
+        <Bills bills={bills} />
       </div>
     );
   }
