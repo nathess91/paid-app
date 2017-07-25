@@ -1,14 +1,15 @@
 class Dashboard extends React.Component {
+  getDate = () => {
+    let today = new Date().toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    return today.toUpperCase();
+  }
   render () {
-    getDate = () => {
-      let today = new Date().toLocaleDateString('en-US', {
-        weekday: 'long',
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      });
-      return today.toUpperCase();
-    }
+    const { bills, user } = this.props;
     greet = () => {
       const hours = new Date().getHours();
       if (hours > 12) {
@@ -17,12 +18,12 @@ class Dashboard extends React.Component {
         return 'Good Morning,';
       }
     }
-    const firstName = this.props.user.first_name;
+    const firstName = user.first_name;
     return (
       <div className="container">
-        <p>{getDate()}</p>
+        <p>{this.getDate()}</p>
         <h3>{`${greet()} ${firstName}`}</h3>
-        <Bills bills={this.props.bills} />
+        <Bills bills={bills} />
       </div>
     );
   }

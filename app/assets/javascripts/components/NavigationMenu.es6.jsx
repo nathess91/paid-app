@@ -6,7 +6,7 @@ class NavigationMenu extends React.Component {
            <div className="nav-wrapper">
              <a href="/" className="brand-logo">{ 'Paid' }</a>
              <ul className="right hide-on-med-and-down">
-               <li><a href="#">{ 'Add New Bill' }</a></li>
+               <li><a href="/bills/new">{ 'Add New Bill' }</a></li>
                <li><a href="/logout">{ 'Log Out' }</a></li>
              </ul>
            </div>
