@@ -20,8 +20,8 @@ class Dashboard extends React.Component {
     const firstName = this.props.user.first_name;
     return (
       <div className="container">
-        <p>{getDate ``}</p>
-        <h3>{greet ``} {firstName}</h3>
+        <p>{getDate()}</p>
+        <h3>{`${greet()} ${firstName}`}</h3>
         <Bills bills={this.props.bills} />
       </div>
     );
