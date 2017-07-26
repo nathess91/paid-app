@@ -1,5 +1,6 @@
 class NavigationMenu extends React.Component {
   render () {
+
     return (
       <div className="navbar-fixed">
          <nav>
