@@ -1,5 +1,59 @@
 @import "materialize";
 
+html, body {
+  background-color: #EFEFEF;
+  font-family: 'Open Sans', sans-serif;
+  color: #545454;
+}
+
 select {
   display: block !important;
+}
+
+nav {
+  background-color: #FFFFFF;
+}
+
+nav li a {
+  color: #545454;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+.margin-top-0 {
+  margin-top: 0;
+}
+
+.margin-top-75 {
+  margin-top: 75px;
+}
+
+input[type=text]:focus {
+  border-bottom: 1px solid #FF3835 !important;
+  box-shadow: 0 1px 0 0 #FF3835 !important;
+}
+
+[type="radio"]:checked, label:after {
+  background-color: #FF3835 !important;
+  border: 2px solid red !important;
+}
+
+.btn {
+  border-radius: 0px;
+  background-color: #FF3835;
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  background-color: red;
+}
+
+.card-left {
+  background-color: #CBEAF5;
 }

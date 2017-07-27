@@ -3,7 +3,8 @@ class BillsController < ApplicationController
   def index
     @user = current_user
     @bills = @user.bills
-    render component: 'Dashboard', props: { bills: @bills, user: @user }
+    @payments = Payment.all
+    render component: 'Dashboard', props: { bills: @bills, user: @user, payments: @payments }
   end
 
   def new
