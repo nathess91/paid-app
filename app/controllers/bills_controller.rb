@@ -3,7 +3,7 @@ class BillsController < ApplicationController
   def index
     @user = current_user
     @bills = @user.bills
-    @payments = Payment.all
+    @payments = Payment.all.order(created_at: :desc)
     render component: 'Dashboard', props: { bills: @bills, user: @user, payments: @payments }
   end
 

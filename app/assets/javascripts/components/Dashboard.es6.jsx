@@ -1,5 +1,8 @@
 class Dashboard extends React.Component {
   render () {
+
+    const { bills, user, payments } = this.props;
+
     getDate = () => {
       let today = new Date().toLocaleDateString('en-US', {
         weekday: 'long',
@@ -9,13 +12,14 @@ class Dashboard extends React.Component {
       });
       return today.toUpperCase();
     }
-    const { bills, user } = this.props;
+
     getTotalDebt = () => {
       let billAmounts = bills.map((bill, index) => {
         return (parseInt(bill.total_amount));
       });
       return billAmounts.reduce(function(billAmount, sum) { return sum += billAmount; }, 0);
     }
+
     greet = () => {
       const hours = new Date().getHours();
       if (hours >= 12) {
@@ -24,13 +28,13 @@ class Dashboard extends React.Component {
         return 'Good Morning,';
       }
     }
-    const firstName = user.first_name;
+
     return (
       <div className="container margin-top-75">
         <p className="bold">{getDate()}</p>
-        <h3>{`${greet()} ${firstName}.`}</h3>
+        <h3>{`${greet()} ${user.first_name}.`}</h3>
         <p>{`Your total debt is $${getTotalDebt()}.`}</p>
-        <Bills bills={bills} />
+        <Bills bills={bills} payments={payments} />
       </div>
     );
   }
