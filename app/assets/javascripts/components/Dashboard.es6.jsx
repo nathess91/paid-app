@@ -22,10 +22,12 @@ class Dashboard extends React.Component {
 
     greet = () => {
       const hours = new Date().getHours();
-      if (hours >= 12) {
-        return 'Good Afternoon,';
+      if (hours >= 12 && hours < 17) {
+        return 'Good afternoon,';
+      } else if (hours >= 17) {
+        return 'Good evening,';
       } else {
-        return 'Good Morning,';
+        return 'Good morning,';
       }
     }
 
@@ -33,7 +35,7 @@ class Dashboard extends React.Component {
       <div className="container margin-top-75">
         <p className="bold">{getDate()}</p>
         <h3>{`${greet()} ${user.first_name}.`}</h3>
-        <p>{`Your total debt is $${getTotalDebt()}.`}</p>
+        <p className="margin-bottom-75">{`Your total debt is $${getTotalDebt()}.`}</p>
         <Bills bills={bills} payments={payments} />
       </div>
     );

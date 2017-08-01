@@ -116,6 +116,7 @@ class Bills extends React.Component {
                     <p><span className="bill-number">{parseInt(bill.apr)}{'% APR'}</span> {`exp. ${formatDateWithYear(bill.promo_apr_exp_date)}`}</p>
                   </div>
                 </div>
+                <Button />
               </div>
             </div>
           </div>
