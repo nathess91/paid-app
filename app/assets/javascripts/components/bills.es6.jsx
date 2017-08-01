@@ -12,6 +12,25 @@ class Bills extends React.Component {
     formatMoney = (n) => {
       return "$" + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
+    // MM/DD
+    formatDate = (date) => {
+      let d = new Date(date).toLocaleDateString('en-US', {
+        day : 'numeric',
+        month : 'numeric',
+        timeZone: 'UTC'
+      });
+      return d;
+    }
+
+    formatDateWithYear = (date) => {
+      let d = new Date(date).toLocaleDateString('en-US', {
+        day : 'numeric',
+        month : 'numeric',
+        year : 'numeric',
+        timeZone: 'UTC'
+      });
+      return d;
+    }
 
     getAmountPaid = (payments, billId) => {
       for (let key in payments) {
@@ -48,9 +67,8 @@ class Bills extends React.Component {
           amounts.push(parseInt(payments[key]['amount_paid']));
         }
       }
-      let total = (billMinAmt - amounts.reduce((amt, sum) => {
-        return sum += amt;
-      }, 0));
+      let total = (billMinAmt - amounts.reduce((amt, sum) => { return sum += amt; }, 0));
+
       return total <= 0 ? 0 : total;
     }
 
@@ -66,7 +84,7 @@ class Bills extends React.Component {
         <div key={index} className="col s12 m7">
           <div className="card horizontal">
             <div className="card-content card-left">
-              <p className="bold">{bill.due_date}</p>
+              <p className="bold center-align">{formatDate(bill.due_date)}</p>
               <br />
               <div className="center-align">
                 <i className="material-icons medium">{categoryIcon(bill.category)}</i>
@@ -86,17 +104,16 @@ class Bills extends React.Component {
                 </div>
                 <div className="row">
                   <div className="col s12 m4">
-                    <p>{`$${amountLeftToPay(this.props.payments, bill.id, bill.min_amount_due)} remaining to pay`}</p>
-                    <p>{`$${getAmountPaid(this.props.payments, bill.id)} paid on ${getDatePaid(this.props.payments, bill.id)}`}</p>
+                    <p><span className="bill-number">${amountLeftToPay(this.props.payments, bill.id, bill.min_amount_due)}</span> {'remaining to pay'}</p>
+                    <p><span className="bill-number">${getAmountPaid(this.props.payments, bill.id)}</span> {`paid on ${formatDate(getDatePaid(this.props.payments, bill.id))}`}</p>
                   </div>
                   <div className="col s12 m4">
-                    <p>{`$${bill.min_amount_due} min. amount due`}</p>
+                    <p><span className="bill-number">${bill.min_amount_due}</span> {'min. amount due'}</p>
                     <p>{'suggested amount'}</p>
                   </div>
                   <div className="col s12 m4">
-                    <p>{`$${remainingAmount(this.props.payments, bill.id, bill.total_amount)} total debt remaining`}</p>
-                    // 0% APR exp. 5/18
-                    <p>{`${bill.promo_apr_exp_date}`}</p>
+                    <p><span className="bill-number">${remainingAmount(this.props.payments, bill.id, bill.total_amount)}</span> {'total debt remaining'}</p>
+                    <p><span className="bill-number">{parseInt(bill.apr)}{'% APR'}</span> {`exp. ${formatDateWithYear(bill.promo_apr_exp_date)}`}</p>
                   </div>
                 </div>
               </div>

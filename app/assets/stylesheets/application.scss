@@ -34,6 +34,10 @@ nav li a {
   margin-top: 75px;
 }
 
+.red {
+  color: #FF3835;
+}
+
 input[type=text]:focus {
   border-bottom: 1px solid #FF3835 !important;
   box-shadow: 0 1px 0 0 #FF3835 !important;
@@ -56,4 +60,8 @@ input[type=text]:focus {
 
 .card-left {
   background-color: #CBEAF5;
+}
+
+.bill-number {
+  font-size: 24px;
 }
