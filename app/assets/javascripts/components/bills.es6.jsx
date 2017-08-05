@@ -76,7 +76,43 @@ class Bills extends React.Component {
       let billAmounts = bills.map((bill, index) => {
         return (parseInt(bill.total_amount));
       });
-      return billAmounts.reduce(function(billAmount, sum) { return sum += billAmount; }, 0);
+      return billAmounts.reduce((billAmount, sum) => { return sum += billAmount; }, 0);
+    }
+
+    inputVisibility = (e, state) => {
+      e.preventDefault();
+      const hiddenInputs = document.getElementsByClassName('payment-form');
+
+      for (let i = 0; i < hiddenInputs.length; i++) {
+        if (state === 'visible') {
+          hiddenInputs[i].classList.remove('hidden');
+        } else if (state === 'hidden') {
+          hiddenInputs[i].classList.add('hidden');
+        }
+      }
+    }
+
+    handleLogPaymentClick = (e) => {
+      e.preventDefault();
+      inputVisibility(e, 'visible');
+      // const hiddenInputs = document.getElementsByClassName('payment-form');
+
+      // for (let input in hiddenInputs) {
+      //   hiddenInputs[input].classList.remove('hidden');
+      // }
+
+      // for (let i = 0; i < hiddenInputs.length; i++) {
+      //   hiddenInputs[i].classList.remove('hidden');
+      // }
+
+      let amountPaid = this.amountInputBox;
+      let datePaid = this.dateInputBox;
+
+      console.log('my amount paid: ', amountPaid);
+      console.log('the date paid: ', datePaid);
+
+      // empty out the text box in this component
+      // this.inputBox.value = '';
     }
 
     const billData = this.props.bills.map((bill, index) => {
@@ -85,8 +121,7 @@ class Bills extends React.Component {
           <div className="card horizontal">
             <div className="card-content card-left">
               <p className="bold center-align">{formatDate(bill.due_date)}</p>
-              <br />
-              <div className="center-align">
+              <div className="center-align margin-top-75">
                 <i className="material-icons medium">{categoryIcon(bill.category)}</i>
               </div>
             </div>
@@ -97,9 +132,7 @@ class Bills extends React.Component {
                     <p className="bold">{bill.name.toUpperCase()}</p>
                   </div>
                   <div className="col s2">
-                    <p className="right-align">
-                      <i className="material-icons">edit</i>
-                    </p>
+                    <EditButton billId={bill.id} />
                   </div>
                 </div>
                 <div className="row">
@@ -116,7 +149,40 @@ class Bills extends React.Component {
                     <p><span className="bill-number">{parseInt(bill.apr)}{'% APR'}</span> {`exp. ${formatDateWithYear(bill.promo_apr_exp_date)}`}</p>
                   </div>
                 </div>
-                <Button />
+                <div className="row flex">
+                  <div className="col s3 hidden payment-form" id={bill.id}>
+                    <label className="bold label">{'PAYMENT AMOUNT'}</label>
+                    <input
+                      type="text"
+                      className="validate bottom-align"
+                      ref={(input) => this.amountInputBox = input}
+                    />
+                  </div>
+                  <div className="col s3 hidden payment-form" id={bill.id}>
+                    <label className="bold label">{'DATE'}</label>
+                    <input
+                      type="text"
+                      className="validate datepicker bottom-align"
+                      ref={(input) => this.dateInputBox = input}
+                    />
+                  </div>
+                  <div className="col s3 bottom-align hidden payment-form" id={bill.id}>
+                    <a
+                       className="waves-effect waves-light btn btn-cancel"
+                       onClick={(e) => inputVisibility(e, 'hidden')}
+                    >
+                       {'CANCEL'}
+                    </a>
+                  </div>
+                  <div className="col s3 bottom-align">
+                    <a
+                      className="waves-effect waves-light btn"
+                      onClick={(e) => handleLogPaymentClick(e)}
+                    >
+                      {'LOG PAYMENT'}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

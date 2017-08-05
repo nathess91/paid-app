@@ -11,6 +11,6 @@ class Bill < ApplicationRecord
 
   def set_defaults
    self.apr  ||= 0
- end
+  end
 
 end

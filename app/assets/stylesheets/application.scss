@@ -22,6 +22,10 @@ nav li a {
   font-weight: 700;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 .margin-bottom-0 {
   margin-bottom: 0;
 }
@@ -40,6 +44,10 @@ nav li a {
 
 .red {
   color: #FF3835;
+}
+
+input[type=text] {
+  margin: 0 !important;
 }
 
 input[type=text]:focus {
@@ -62,10 +70,35 @@ input[type=text]:focus {
   background-color: red;
 }
 
+.btn-cancel {
+  border-radius: 0px;
+  letter-spacing: 0.5px;
+  background-color: #EFEFEF;
+  color: #545454;
+}
+
+.btn-cancel:hover {
+  background-color: #D8D5D5;
+}
+
 .card-left {
   background-color: #CBEAF5;
 }
 
 .bill-number {
   font-size: 24px;
+}
+
+.label {
+  font-size: 10px;
+}
+
+.flex {
+  display: flex;
+}
+
+.bottom-align {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: space-around;
 }
