@@ -1,0 +1,63 @@
+<div class="container">
+  <h2 class="center-align">Add New Bill</h2>
+  <div class="row">
+    <%= form_for @bill do |f| %>
+      <div class="col s12">
+        <div class="row">
+          <div class="col s4">
+            <label for="bill_name" style="margin-top:5px">Bill Name</label>
+            <%= f.text_field :name, class: "validate" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2">
+            <label for="due_date">Due Date</label>
+            <%= f.date_field :due_date, class: "datepicker" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <label for="is_debt">Is this bill a debt?</label>
+            <br>
+            <br>
+            <%= f.radio_button :is_debt, true, :value => true %>
+            <%= f.label :is_debt, "Yes", value: true, style: "margin-right: 10px" %>
+            <%= f.radio_button :is_debt, false, :value => false %>
+            <%= f.label :is_debt, "No", value: false %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2">
+            <label for="interest_rate">Promo APR Expiration Date</label>
+            <%= f.date_field :promo_apr_exp_date, class: "validate datepicker" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <label for="interest_rate">Interest Rate</label>
+            <%= f.text_field :interest_rate, class: "validate" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2">
+            <label for="interest_rate">Bill Total Amount</label>
+            <%= f.text_field :total_amount, class: "validate" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s2">
+            <label for="interest_rate">Minimum Amount Due</label>
+            <%= f.text_field :min_amount_due, class: "validate" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <label for="category">Is this a one-time or recurring bill?</label>
+            <%= f.select :category, Bill.categories.map { |key, value| [key.humanize, key] }, :include_blank => true %>
+          </div>
+        </div>
+        <%= f.submit "Submit", class: "waves-effect waves-light btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>

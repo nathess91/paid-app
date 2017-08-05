@@ -1,1 +1,104 @@
 @import "materialize";
+
+html, body {
+  background-color: #EFEFEF;
+  font-family: 'Open Sans', sans-serif;
+  color: #545454;
+}
+
+select {
+  display: block !important;
+}
+
+nav {
+  background-color: #FFFFFF;
+}
+
+nav li a {
+  color: #545454;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+.margin-top-0 {
+  margin-top: 0;
+}
+
+.margin-top-75 {
+  margin-top: 75px;
+}
+
+.margin-bottom-75 {
+  margin-bottom: 75px;
+}
+
+.red {
+  color: #FF3835;
+}
+
+input[type=text] {
+  margin: 0 !important;
+}
+
+input[type=text]:focus {
+  border-bottom: 1px solid #FF3835 !important;
+  box-shadow: 0 1px 0 0 #FF3835 !important;
+}
+
+[type="radio"]:checked, label:after {
+  background-color: #FF3835 !important;
+  border: 2px solid red !important;
+}
+
+.btn {
+  border-radius: 0px;
+  background-color: #FF3835;
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  background-color: red;
+}
+
+.btn-cancel {
+  border-radius: 0px;
+  letter-spacing: 0.5px;
+  background-color: #EFEFEF;
+  color: #545454;
+}
+
+.btn-cancel:hover {
+  background-color: #D8D5D5;
+}
+
+.card-left {
+  background-color: #CBEAF5;
+}
+
+.bill-number {
+  font-size: 24px;
+}
+
+.label {
+  font-size: 10px;
+}
+
+.flex {
+  display: flex;
+}
+
+.bottom-align {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
