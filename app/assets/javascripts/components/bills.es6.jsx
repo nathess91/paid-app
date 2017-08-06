@@ -12,7 +12,7 @@ class Bills extends React.Component {
     formatMoney = (n) => {
       return "$" + " " + n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
-    // MM/DD
+
     formatDate = (date) => {
       let d = new Date(date).toLocaleDateString('en-US', {
         day : 'numeric',
@@ -34,6 +34,10 @@ class Bills extends React.Component {
 
     getAmountPaid = (payments, billId) => {
       for (let key in payments) {
+        // console.log('bill id', payments[key]['bill_id'], typeof payments[key]['bill_id'] === 'number')
+        // console.log('payment amt', parseInt(payments[key]['amount_paid']));
+        let amountPaid = parseInt(payments[key]['amount_paid']);
+        // console.log(amountPaid)
         if (payments[key]['bill_id'] == billId) {
           return payments[key]['amount_paid'];
         }
@@ -138,7 +142,12 @@ class Bills extends React.Component {
                 <div className="row">
                   <div className="col s12 m4">
                     <p><span className="bill-number">${amountLeftToPay(this.props.payments, bill.id, bill.min_amount_due)}</span> {'remaining to pay'}</p>
-                    <p><span className="bill-number">${getAmountPaid(this.props.payments, bill.id)}</span> {`paid on ${formatDate(getDatePaid(this.props.payments, bill.id))}`}</p>
+                    <p>
+                      <span className="bill-number">
+                        ${getAmountPaid(this.props.payments, bill.id)}
+                      </span>
+                      {` paid on ${formatDate(getDatePaid(this.props.payments, bill.id))}`}
+                    </p>
                   </div>
                   <div className="col s12 m4">
                     <p><span className="bill-number">${bill.min_amount_due}</span> {'min. amount due'}</p>
@@ -146,43 +155,20 @@ class Bills extends React.Component {
                   </div>
                   <div className="col s12 m4">
                     <p><span className="bill-number">${remainingAmount(this.props.payments, bill.id, bill.total_amount)}</span> {'total debt remaining'}</p>
-                    <p><span className="bill-number">{parseInt(bill.apr)}{'% APR'}</span> {`exp. ${formatDateWithYear(bill.promo_apr_exp_date)}`}</p>
+                    {bill.apr
+                    ? (
+                      <p>
+                        <span className="bill-number">
+                          {parseInt(bill.apr)}{'% APR'}
+                        </span>
+                        {` exp. ${formatDateWithYear(bill.promo_apr_exp_date)}`}
+                      </p>
+                    )
+                    : null
+                  }
                   </div>
                 </div>
-                <div className="row flex">
-                  <div className="col s3 hidden payment-form" id={bill.id}>
-                    <label className="bold label">{'PAYMENT AMOUNT'}</label>
-                    <input
-                      type="text"
-                      className="validate bottom-align"
-                      ref={(input) => this.amountInputBox = input}
-                    />
-                  </div>
-                  <div className="col s3 hidden payment-form" id={bill.id}>
-                    <label className="bold label">{'DATE'}</label>
-                    <input
-                      type="text"
-                      className="validate datepicker bottom-align"
-                      ref={(input) => this.dateInputBox = input}
-                    />
-                  </div>
-                  <div className="col s3 bottom-align hidden payment-form" id={bill.id}>
-                    <a
-                       className="waves-effect waves-light btn btn-cancel"
-                       onClick={(e) => inputVisibility(e, 'hidden')}
-                    >
-                       {'CANCEL'}
-                    </a>
-                  </div>
-                  <div className="col s3 bottom-align">
-                    <a
-                      className="waves-effect waves-light btn"
-                      onClick={(e) => handleLogPaymentClick(e)}
-                    >
-                      {'LOG PAYMENT'}
-                    </a>
-                  </div>
-                </div>
+                <NewPayment />
               </div>
             </div>
           </div>

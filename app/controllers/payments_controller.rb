@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
+    render component: 'NewPayment', props: { payments: @payments, payment: @payment, user_id: @payment.user_id, bill_id: @payment.bill_id }
     respond_to do |format|
       format.json do
         if @payment.save
